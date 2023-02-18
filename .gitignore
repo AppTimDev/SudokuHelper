@@ -1,0 +1,11 @@
+.vs
+packages
+bin/Debug
+Debug
+*/obj/Release
+temp
+temp.*
+*.pdb
+*.exe.config
+*.log
+LogFiles
