@@ -57,6 +57,7 @@
             this.btnSinglePosition = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCandidateLines = new System.Windows.Forms.Button();
+            this.btnNakedPair = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTest
@@ -361,12 +362,24 @@
             this.btnCandidateLines.UseVisualStyleBackColor = true;
             this.btnCandidateLines.Click += new System.EventHandler(this.btnCandidateLines_Click);
             // 
+            // btnNakedPair
+            // 
+            this.btnNakedPair.Location = new System.Drawing.Point(1132, 223);
+            this.btnNakedPair.Name = "btnNakedPair";
+            this.btnNakedPair.Size = new System.Drawing.Size(111, 33);
+            this.btnNakedPair.TabIndex = 46;
+            this.btnNakedPair.TabStop = false;
+            this.btnNakedPair.Text = "Naked Pair";
+            this.btnNakedPair.UseVisualStyleBackColor = true;
+            this.btnNakedPair.Click += new System.EventHandler(this.btnNakedPair_Click);
+            // 
             // SudokuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1331, 749);
+            this.Controls.Add(this.btnNakedPair);
             this.Controls.Add(this.btnCandidateLines);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSinglePosition);
@@ -435,5 +448,6 @@
         private System.Windows.Forms.Button btnSinglePosition;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCandidateLines;
+        private System.Windows.Forms.Button btnNakedPair;
     }
 }

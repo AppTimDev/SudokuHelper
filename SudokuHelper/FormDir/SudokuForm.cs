@@ -774,5 +774,29 @@ namespace SudokuHelper.FormDir
                 log($"Cannot Apply {algo.AlgorithmName}!");
             }
         }
+
+        private void btnNakedPair_Click(object sender, EventArgs e)
+        {
+            AlgoNakedPair algo = new AlgoNakedPair();
+            
+            //SudokuGrid gridCopy = grid.Copy();
+            //List<SudokuChange> changes = algo.Analyze(gridCopy);            
+            List<SudokuChange> changes = algo.Analyze(grid);
+            if (changes.Count > 0)
+            {
+                grid.Unselect();
+                foreach (var c in changes)
+                {
+                    grid.Select(c.Row, c.Col);
+                    log($"{c.Message}");
+                }
+                grid.Draw(ref g);
+                Repaint();
+            }
+            else
+            {
+                log($"Cannot Apply {algo.AlgorithmName}!");
+            }
+        }
     }
 }

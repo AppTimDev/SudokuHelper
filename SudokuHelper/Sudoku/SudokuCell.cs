@@ -179,6 +179,10 @@ namespace SudokuHelper.Sudoku
             }
             return false;
         }
+        public bool CountNotes(int n)
+        {
+            return NotesList.Count == n;
+        }
         public void ComputeNoteList()
         {
             if (!this.IsLocked && this.Num == 0)
@@ -268,6 +272,19 @@ namespace SudokuHelper.Sudoku
         public bool IsSameCol(SudokuCell cell)
         {
             return cell.Col == Col;
+        }
+
+        public bool HasSameNotes(SudokuCell cell)
+        {
+            //compare notes with other cells
+            //if both have same unmbers in notes, return true
+            //assume both cells do not contain duplicate note number
+            if(NotesList.Count != cell.NotesList.Count) return false;
+            foreach (var note in cell.NotesList)
+            {
+                if(!NotesList.Contains(note)) return false;
+            }
+            return true;
         }
     }
 }

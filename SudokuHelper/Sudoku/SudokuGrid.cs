@@ -266,6 +266,18 @@ namespace SudokuHelper.Sudoku
             }
             return lst;
         }
+        public List<SudokuCell> FindEmptyCellsWithNNotes(int n)
+        {
+            List<SudokuCell> lst = new List<SudokuCell>();
+            foreach (var cell in this.Cells)
+            {
+                if (cell.Num == 0 && cell.CountNotes(n))
+                {
+                    lst.Add(cell);
+                }
+            }
+            return lst;
+        }
         public bool IsValid()
         {
             foreach(var house in houses)

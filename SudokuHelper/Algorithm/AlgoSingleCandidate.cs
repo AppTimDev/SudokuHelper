@@ -9,18 +9,17 @@ namespace SudokuHelper.Algorithm
         public string AlgorithmName { get; } = "Single Candidate";
         public List<SudokuChange> Analyze(SudokuGrid grid)
         {
+            //think about compute notes first??
+            grid.ComputeNoteList();
+
             List<SudokuChange> changes = new List<SudokuChange>();
-            List <SudokuCell> emptyCells = grid.FindEmptyCells();
+            List <SudokuCell> emptyCells = grid.FindEmptyCellsWithNNotes(1);
             foreach (var cell in emptyCells)
             {
-                cell.ComputeNoteList();
-                if (cell.NotesList.Count == 1)
-                {
-                    SudokuChange chg = new SudokuChange(SudokuChangeType.SetNum, cell.Row, cell.Col, cell.NotesList[0]);
-                    chg.Message = $"R{cell.Row}C{cell.Col}: only one possible number {cell.NotesList[0]}";
-                    changes.Add(chg);
-                    return changes;
-                }
+                SudokuChange chg = new SudokuChange(SudokuChangeType.SetNum, cell.Row, cell.Col, cell.NotesList[0]);
+                chg.Message = $"R{cell.Row}C{cell.Col}: only one possible number {cell.NotesList[0]}";
+                changes.Add(chg);
+                return changes;
             }
             return changes;
         }
