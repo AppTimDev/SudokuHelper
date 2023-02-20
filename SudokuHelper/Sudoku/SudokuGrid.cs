@@ -247,6 +247,19 @@ namespace SudokuHelper.Sudoku
             }
             return false;
         }
+        public override string ToString()
+        {
+            //return the sudoku string
+            string s = "";
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    s += matrix[i, j].Num.ToString();
+                }
+            }
+            return s;
+        }
         public void ComputeNoteList()
         {
             foreach (var cell in this.Cells)

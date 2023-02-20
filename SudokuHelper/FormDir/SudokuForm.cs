@@ -707,7 +707,15 @@ namespace SudokuHelper.FormDir
                 log("The sudoku string is not valid!! It should contain 81 characters from 0 to 9.");
             }
         }
-
+        private void btnOutputSudo_Click(object sender, EventArgs e)
+        {
+            if (!grid.IsUnique())
+            {
+                log("There is no solution. The sudoku is not solvable!");
+                return;
+            }
+            log(grid.ToString());
+        }
         private void btnSingleCandidate_Click(object sender, EventArgs e)
         {
             SudokuGrid gridCopy = grid.Copy();

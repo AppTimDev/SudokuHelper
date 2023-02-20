@@ -17,7 +17,6 @@ namespace SudokuHelper.Algorithm
             //think about compute notes first??
             //pass a grid copy??
             //grid.ComputeNoteList();
-
             List<SudokuChange> changes = new List<SudokuChange>();
             foreach (var house in grid.Houses)
             {

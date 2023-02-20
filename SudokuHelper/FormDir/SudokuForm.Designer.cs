@@ -58,6 +58,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCandidateLines = new System.Windows.Forms.Button();
             this.btnNakedPair = new System.Windows.Forms.Button();
+            this.btnOutputSudo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTest
@@ -303,14 +304,15 @@
             // 
             // tbSudoku
             // 
+            this.tbSudoku.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.tbSudoku.Location = new System.Drawing.Point(591, 12);
             this.tbSudoku.Name = "tbSudoku";
-            this.tbSudoku.Size = new System.Drawing.Size(345, 20);
+            this.tbSudoku.Size = new System.Drawing.Size(240, 26);
             this.tbSudoku.TabIndex = 40;
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(970, 12);
+            this.btnLoad.Location = new System.Drawing.Point(845, 12);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(111, 33);
             this.btnLoad.TabIndex = 41;
@@ -373,12 +375,24 @@
             this.btnNakedPair.UseVisualStyleBackColor = true;
             this.btnNakedPair.Click += new System.EventHandler(this.btnNakedPair_Click);
             // 
+            // btnOutputSudo
+            // 
+            this.btnOutputSudo.Location = new System.Drawing.Point(961, 12);
+            this.btnOutputSudo.Name = "btnOutputSudo";
+            this.btnOutputSudo.Size = new System.Drawing.Size(120, 33);
+            this.btnOutputSudo.TabIndex = 47;
+            this.btnOutputSudo.TabStop = false;
+            this.btnOutputSudo.Text = "Output Sudoku String";
+            this.btnOutputSudo.UseVisualStyleBackColor = true;
+            this.btnOutputSudo.Click += new System.EventHandler(this.btnOutputSudo_Click);
+            // 
             // SudokuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1331, 749);
+            this.Controls.Add(this.btnOutputSudo);
             this.Controls.Add(this.btnNakedPair);
             this.Controls.Add(this.btnCandidateLines);
             this.Controls.Add(this.label1);
@@ -449,5 +463,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCandidateLines;
         private System.Windows.Forms.Button btnNakedPair;
+        private System.Windows.Forms.Button btnOutputSudo;
     }
 }
