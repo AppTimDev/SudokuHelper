@@ -277,7 +277,7 @@
             this.btnFindNext.Size = new System.Drawing.Size(111, 33);
             this.btnFindNext.TabIndex = 37;
             this.btnFindNext.TabStop = false;
-            this.btnFindNext.Text = "Find Next";
+            this.btnFindNext.Text = "Find Next Step";
             this.btnFindNext.UseVisualStyleBackColor = true;
             this.btnFindNext.Click += new System.EventHandler(this.btnFindNext_Click);
             // 

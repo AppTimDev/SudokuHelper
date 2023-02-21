@@ -525,6 +525,29 @@ namespace SudokuHelper.FormDir
                 log(msg, true, false);
             }
         }
+        private bool CanFindNextStep()
+        {
+            //must have empty cell
+            //grid is valid
+            //grid is unique
+            if (grid.IsCompleted())
+            {
+                //no empty cell and the grid is valid
+                log("The sudoku is solved!");
+                return false;
+            }
+            if (!grid.IsValid())
+            {
+                log("The sudoku is invalid now. Cannot proceed!");
+                return false;
+            }
+            if (!grid.IsUnique())
+            {
+                log("There is no unique solution!");
+                return false;
+            }
+            return true;
+        }
         private bool CheckComplete()
         {
             if (grid.IsCompleted())
@@ -639,8 +662,10 @@ namespace SudokuHelper.FormDir
         }
         private void btnHints_Click(object sender, EventArgs e)
         {
+            if (!CanFindNextStep()) return;
+
             List<SudokuChange> changes = Analyze();
-            if (changes!=null && changes.Count > 0)
+            if (changes != null && changes.Count > 0)
             {
                 SudokuChange c = changes[0];
                 grid.Unselect();
@@ -656,6 +681,7 @@ namespace SudokuHelper.FormDir
         }
         private void btnFindNext_Click(object sender, EventArgs e)
         {
+            if (!CanFindNextStep()) return;
             List<SudokuChange> changes = Analyze();
             if (changes != null && changes.Count > 0)
             {
@@ -675,6 +701,7 @@ namespace SudokuHelper.FormDir
 
         private void btnAlgo_Click(object sender, EventArgs e)
         {
+            if (!CanFindNextStep()) return;
             bool bContinue = true;
             while (bContinue)
             {

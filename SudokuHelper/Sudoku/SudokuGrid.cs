@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 
 namespace SudokuHelper.Sudoku
 {
@@ -261,15 +262,15 @@ namespace SudokuHelper.Sudoku
         public override string ToString()
         {
             //return the sudoku string
-            string s = "";
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    s += matrix[i, j].Num.ToString();
+                    sb.Append(matrix[i, j].Num);
                 }
             }
-            return s;
+            return sb.ToString();
         }
         public void ComputeNoteList()
         {
@@ -376,17 +377,22 @@ namespace SudokuHelper.Sudoku
         {
             return FindSolutions() == 1;
         }
+        public bool IsEmpty()
+        {
+            foreach (var cell in this.Cells)
+            {
+                if (cell.IsEmpty())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public bool IsCompleted()
         {
             //no empty cell and the grid is valid
+            if (IsEmpty()) return false;
             if (!IsValid()) return false;
-            foreach (var cell in this.Cells)
-            {
-                if (cell.Num == 0)
-                {
-                    return false;
-                }
-            }
             return true;
         }
         public bool IsSelected()

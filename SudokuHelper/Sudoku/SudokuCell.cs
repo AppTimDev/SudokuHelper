@@ -277,7 +277,10 @@ namespace SudokuHelper.Sudoku
         {
             return cell.Col == Col;
         }
-
+        public bool IsEmpty()
+        {
+            return num == 0;
+        }
         public bool HasSameNotes(SudokuCell cell)
         {
             //compare notes with other cells
