@@ -173,9 +173,9 @@ namespace SudokuHelper.Sudoku
                 }
                 if (brushBackColor != null)
                 {
-                    g.FillEllipse(brushBackColor, col * CellSize + x, row * CellSize + y, 15, 15);
+                    g.FillEllipse(brushBackColor, col * CellSize + x+2, row * CellSize + y + 2, 15, 15);
                 }
-                g.DrawString(num.ToString(), f, brush, col * CellSize + x, row * CellSize + y);
+                g.DrawString(num.ToString(), f, brush, col * CellSize + x + 3, row * CellSize + y + 2);
             }
         }
         private static void DrawNotes(Graphics g, int row, int col, Font f, SolidBrush brush)
