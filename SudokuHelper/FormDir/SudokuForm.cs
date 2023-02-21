@@ -525,6 +525,15 @@ namespace SudokuHelper.FormDir
                 log(msg, true, false);
             }
         }
+        private bool CheckComplete()
+        {
+            if (grid.IsCompleted())
+            {
+                log("The sudoku is solved.");
+                return true;
+            }
+            return false;
+        }
         private bool CheckUnique()
         {
             int solnCnt = grid.FindSolutions();
@@ -805,6 +814,19 @@ namespace SudokuHelper.FormDir
             {
                 log($"Cannot Apply {algo.AlgorithmName}!");
             }
+        }
+
+        private void btnHighlightNote_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i <= 4; i++)
+            {
+                grid.HighlightNoteNum(ref g, i, Sudoku.Sudoku.brushLightGreen);
+            }
+            for (int i = 5; i <= 9; i++)
+            {
+                grid.HighlightNoteNum(ref g, i, Sudoku.Sudoku.brushLightPink);
+            }
+            Repaint();
         }
     }
 }

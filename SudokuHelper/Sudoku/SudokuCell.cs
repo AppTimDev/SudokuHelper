@@ -133,6 +133,10 @@ namespace SudokuHelper.Sudoku
             var cell = this;
             Sudoku.DrawSudokuCell(ref g, ref cell);
         }
+        public void HighlightNoteNum(ref Graphics g, int noteNum, SolidBrush brush)
+        {
+            Sudoku.HighlightNoteNum(g, noteNum, Row, Col, brush);
+        }
         public bool CheckFault()
         {
             //check if there is repeat number in the houses

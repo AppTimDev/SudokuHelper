@@ -59,6 +59,7 @@
             this.btnCandidateLines = new System.Windows.Forms.Button();
             this.btnNakedPair = new System.Windows.Forms.Button();
             this.btnOutputSudo = new System.Windows.Forms.Button();
+            this.btnHighlightNote = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTest
@@ -386,12 +387,24 @@
             this.btnOutputSudo.UseVisualStyleBackColor = true;
             this.btnOutputSudo.Click += new System.EventHandler(this.btnOutputSudo_Click);
             // 
+            // btnHighlightNote
+            // 
+            this.btnHighlightNote.Location = new System.Drawing.Point(729, 453);
+            this.btnHighlightNote.Name = "btnHighlightNote";
+            this.btnHighlightNote.Size = new System.Drawing.Size(111, 33);
+            this.btnHighlightNote.TabIndex = 48;
+            this.btnHighlightNote.TabStop = false;
+            this.btnHighlightNote.Text = "Test Highlight Note";
+            this.btnHighlightNote.UseVisualStyleBackColor = true;
+            this.btnHighlightNote.Click += new System.EventHandler(this.btnHighlightNote_Click);
+            // 
             // SudokuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1331, 749);
+            this.Controls.Add(this.btnHighlightNote);
             this.Controls.Add(this.btnOutputSudo);
             this.Controls.Add(this.btnNakedPair);
             this.Controls.Add(this.btnCandidateLines);
@@ -464,5 +477,6 @@
         private System.Windows.Forms.Button btnCandidateLines;
         private System.Windows.Forms.Button btnNakedPair;
         private System.Windows.Forms.Button btnOutputSudo;
+        private System.Windows.Forms.Button btnHighlightNote;
     }
 }

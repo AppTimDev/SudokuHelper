@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace SudokuHelper.Sudoku
 {
@@ -20,6 +21,8 @@ namespace SudokuHelper.Sudoku
         public static SolidBrush brushBlack = new SolidBrush(Color.Black);
         public static SolidBrush brushBlue = new SolidBrush(Color.Blue);
         public static SolidBrush brushRed = new SolidBrush(Color.Red);
+        public static SolidBrush brushLightGreen = new SolidBrush(Color.LightGreen);
+        public static SolidBrush brushLightPink = new SolidBrush(Color.LightPink);
 
         //select cells
         public static SolidBrush brushYellow = new SolidBrush(Color.Yellow);
@@ -112,11 +115,6 @@ namespace SudokuHelper.Sudoku
                     {
                         DrawNoteNum(g, noteNum, cell.Row, cell.Col, fontSmall, brushBlack);
                     }
-                    //for (int i = 1; i <= 9; i++)
-                    //{
-                    //    if (cell.Notes[i])
-                    //        DrawNoteNum(g, i, cell.Row, cell.Col, fontSmall, brushBlack);
-                    //}
                 }
             }
         }
@@ -134,7 +132,11 @@ namespace SudokuHelper.Sudoku
             }
         }
 
-        private static void DrawNoteNum(Graphics g, int num, int row, int col, Font f, SolidBrush brush)
+        public static void HighlightNoteNum(Graphics g, int noteNum, int row, int col, SolidBrush brush)
+        {
+            DrawNoteNum(g, noteNum, row, col, fontSmall, brushBlack, brush);
+        }
+        private static void DrawNoteNum(Graphics g, int num, int row, int col, Font f, SolidBrush brush, SolidBrush brushBackColor = null)
         {
             if (num > 0 && num <= 9)
             {
@@ -168,6 +170,10 @@ namespace SudokuHelper.Sudoku
                     case 9:
                         x = 40F; y = 40F;
                         break;
+                }
+                if (brushBackColor != null)
+                {
+                    g.FillEllipse(brushBackColor, col * CellSize + x, row * CellSize + y, 15, 15);
                 }
                 g.DrawString(num.ToString(), f, brush, col * CellSize + x, row * CellSize + y);
             }
