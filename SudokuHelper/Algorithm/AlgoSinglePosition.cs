@@ -27,7 +27,6 @@ namespace SudokuHelper.Algorithm
                 }
                 foreach (var cell in emptyCells)
                 {
-                    cell.ComputeNoteList();
                     foreach(var note in cell.NotesList)
                     {
                         counts[note]++;

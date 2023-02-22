@@ -19,7 +19,7 @@ namespace SudokuHelper.Algorithm
             List<SudokuCell> emptyCells;
 
             //change whether use??
-            grid.ComputeNoteList();
+            //grid.ComputeNoteList();
 
             foreach (var block in grid.GetBlocks())
             {

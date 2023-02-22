@@ -67,6 +67,13 @@ namespace SudokuHelper.Sudoku
                 c.CheckFault();
             }
         }
+        public void RemoveNote(int num)
+        {
+            foreach (var c in this.Cells)
+            {
+                c.RemoveNote(num);
+            }
+        }
         public IEnumerator<SudokuCell> GetEnumerator()
         {
             foreach(var c in this.Cells)

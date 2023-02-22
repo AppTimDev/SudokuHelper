@@ -240,6 +240,10 @@ namespace SudokuHelper.Sudoku
         public void SetNumber(int num, int i, int j)
         {
             matrix[i, j].SetNumber(num);
+        }             
+        public void RemoveNote(int num, int i, int j)
+        {             
+            matrix[i, j].RemoveNote(num);
         }
         public bool Load(string strSudoku)
         {
@@ -439,6 +443,9 @@ namespace SudokuHelper.Sudoku
             if(c.Type == SudokuChangeType.SetNum)
             {
                 this.SetNumber(c.Num, c.Row, c.Col);
+            }else if (c.Type == SudokuChangeType.RemoveNote)
+            {
+                this.RemoveNote(c.NoteNum, c.Row, c.Col);
             }
         }
     }

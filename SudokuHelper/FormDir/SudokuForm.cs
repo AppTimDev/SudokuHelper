@@ -91,6 +91,14 @@ namespace SudokuHelper.FormDir
                 house.Draw(ref g);
             }
         }
+        public void RemoveNoteInHouse(ref Graphics g, ref SudokuCell cell, int noteNum)
+        {
+            foreach (var house in cell.SudokuHouses)
+            {
+                house.RemoveNote(noteNum);
+                house.Draw(ref g);
+            }
+        }
         public void UpdateSudokuCell(int num)
         {
             SudokuCell cell = grid.GetCurrentCell();
@@ -114,7 +122,7 @@ namespace SudokuHelper.FormDir
 
                         //check any duplicate number in house
                         CheckDuplicateInHouse(ref g, ref cell);
-
+                        RemoveNoteInHouse(ref g, ref cell, num);
                         grid.HighlightSelectedNumber(ref g, cell.Num, true);                        
                     }
                     else
@@ -152,64 +160,6 @@ namespace SudokuHelper.FormDir
             Sudoku.Sudoku.DrawGridLines(ref g);
             this.panel1.Invalidate();
         }
-        //public void FindAllCellNotes()
-        //{
-        //    grid.ComputeNoteList();
-        //    grid.Draw(ref g);
-        //    Repaint();
-        //    //SudokuCell cell;
-        //    //for (int i = 0; i < 9; i++)
-        //    //{
-        //    //    for (int j = 0; j < 9; j++)
-        //    //    {
-        //    //        cell = grid[i, j];
-        //    //        if (SetCellNotes(ref cell))
-        //    //        {
-        //    //            cell.Draw(ref g);
-        //    //        }
-        //    //    }
-        //    //}
-
-        //}
-        //public bool SetCellNotes(ref SudokuCell cell)
-        //{
-        //    if(!cell.IsLocked && cell.Num == 0)
-        //    {
-        //        cell.IsNote = true;
-        //        for (int i = 0; i <= 9; i++)
-        //        {
-        //            cell.Notes[i] = true;
-        //        }
-        //        for (int i = 0; i < 9; i++)
-        //        {
-        //            if (grid[i, cell.Col].Num > 0)
-        //            {
-        //                cell.Notes[grid[i, cell.Col].Num] = false;
-        //            }
-        //        }
-        //        for (int i = 0; i < 9; i++)
-        //        {
-        //            if (grid[cell.Row, i].Num > 0)
-        //            {
-        //                cell.Notes[grid[cell.Row, i].Num] = false;
-        //            }
-        //        }
-        //        //Block
-        //        //0, 1, 2
-        //        //3, 4, 5
-        //        //6, 7, 8
-        //        foreach (var c in cell.SudokuBlock)
-        //        {
-        //            if (c.Num > 0)
-        //            {
-        //                cell.Notes[c.Num] = false;
-        //            }
-        //        }
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
         public void SelectSudokuCell(int row, int col)
         {
             if (!grid.IsSelected(row, col))
@@ -644,10 +594,12 @@ namespace SudokuHelper.FormDir
         {
             List<SudokuChange> changes;
             SudokuGrid gridCopy = grid.Copy();
+            //gridCopy.ComputeNoteList();
+
+            //use all the algorithm
             List<ISudokuAlgorithm> algoList = new List<ISudokuAlgorithm>();
             ISudokuAlgorithm alg = new AlgoSingleCandidate();
             algoList.Add(alg);
-
             algoList.Add(new AlgoSinglePosition());
 
             foreach (var algo in algoList)
@@ -682,6 +634,7 @@ namespace SudokuHelper.FormDir
         private void btnFindNext_Click(object sender, EventArgs e)
         {
             if (!CanFindNextStep()) return;
+
             List<SudokuChange> changes = Analyze();
             if (changes != null && changes.Count > 0)
             {

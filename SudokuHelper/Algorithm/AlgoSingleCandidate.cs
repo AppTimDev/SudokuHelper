@@ -10,7 +10,7 @@ namespace SudokuHelper.Algorithm
         public List<SudokuChange> Analyze(SudokuGrid grid)
         {
             //think about compute notes first??
-            grid.ComputeNoteList();
+            //grid.ComputeNoteList();
 
             List<SudokuChange> changes = new List<SudokuChange>();
             List <SudokuCell> emptyCells = grid.FindEmptyCellsWithNNotes(1);
