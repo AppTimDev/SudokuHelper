@@ -89,8 +89,7 @@ namespace SudokuHelper.Algorithm
                                 if (cell.NotesList.Contains(i))
                                 {
                                     SudokuChange chg = new SudokuChange(SudokuChangeType.RemoveNote, cell.Row, cell.Col, 0, i);
-                                    chg.Message = $"R{cell.Row}C{cell.Col}: can remove note number {i}, ";
-                                    chg.Message += $"the number {i} form a candidate line in row-{cell.Row}, block-{block.BlockNum}";
+                                    chg.Message = $"Candidate Line: {i} in R{cell.Row}-B{block.BlockNum} => R{cell.Row}C{cell.Col} != {i}";
                                     changes.Add(chg);
                                 }
                             }
@@ -108,8 +107,7 @@ namespace SudokuHelper.Algorithm
                                 if (cell.NotesList.Contains(i))
                                 {
                                     SudokuChange chg = new SudokuChange(SudokuChangeType.RemoveNote, cell.Row, cell.Col, 0, i);
-                                    chg.Message = $"R{cell.Row}C{cell.Col}: can remove note number {i}, ";
-                                    chg.Message += $"the number {i} form a candidate line in col-{cell.Col}, block-{block.BlockNum}";
+                                    chg.Message = $"Candidate Line: {i} in C{cell.Col}-B{block.BlockNum} => R{cell.Row}C{cell.Col} != {i}";
                                     changes.Add(chg);
                                 }
                             }

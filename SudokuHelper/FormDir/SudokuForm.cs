@@ -590,21 +590,28 @@ namespace SudokuHelper.FormDir
             }
         }
 
-        public List<SudokuChange> Analyze()
+        public List<SudokuChange> Analyze(bool bComputeNote=false)
         {
             List<SudokuChange> changes;
-            SudokuGrid gridCopy = grid.Copy();
-            //gridCopy.ComputeNoteList();
+            //SudokuGrid gridCopy = grid.Copy();
+            if (bComputeNote)
+            {
+                //gridCopy.ComputeNoteList();
+                grid.ComputeNoteList();
+            }
 
             //use all the algorithm
             List<ISudokuAlgorithm> algoList = new List<ISudokuAlgorithm>();
             ISudokuAlgorithm alg = new AlgoSingleCandidate();
             algoList.Add(alg);
             algoList.Add(new AlgoSinglePosition());
+            algoList.Add(new AlgoCandidateLines());
+            algoList.Add(new AlgoNakedPair());
 
             foreach (var algo in algoList)
             {
-                changes = algo.Analyze(gridCopy);
+                //changes = algo.Analyze(gridCopy);
+                changes = algo.Analyze(grid);
                 if (changes.Count > 0)
                 {
                     return changes;
@@ -639,6 +646,8 @@ namespace SudokuHelper.FormDir
             if (changes != null && changes.Count > 0)
             {
                 SudokuChange c = changes[0];
+                //save step first before apply the change
+                SaveStep();
                 grid.Unselect();
                 grid.Apply(c);
                 grid.Select(c.Row, c.Col);

@@ -43,14 +43,14 @@ namespace SudokuHelper.Algorithm
                                 {
                                     if (cell.NotesList.Contains(n1))
                                     {
-                                        SudokuChange chg = new SudokuChange(SudokuChangeType.RemoveNote, cell.Row, cell.Col, n1);
-                                        chg.Message = $"R{cell.Row}C{cell.Col}: naked pair ({n1}, {n2}) eliminate number {n1}";
+                                        SudokuChange chg = new SudokuChange(SudokuChangeType.RemoveNote, cell.Row, cell.Col, 0, n1);
+                                        chg.Message = $"Naked pair: ({n1}, {n2}) in R{cell1.Row}C{cell1.Col}, R{cell2.Row}C{cell2.Col} => R{cell.Row}C{cell.Col} != {n1}";
                                         changes.Add(chg);
                                     }
                                     if (cell.NotesList.Contains(n2))
                                     {
-                                        SudokuChange chg = new SudokuChange(SudokuChangeType.RemoveNote, cell.Row, cell.Col, n2);
-                                        chg.Message = $"R{cell.Row}C{cell.Col}: naked pair ({n1}, {n2}) eliminate number {n2}";
+                                        SudokuChange chg = new SudokuChange(SudokuChangeType.RemoveNote, cell.Row, cell.Col, 0, n2);
+                                        chg.Message = $"Naked pair: ({n1}, {n2}) in R{cell1.Row}C{cell1.Col}, R{cell2.Row}C{cell2.Col} => R{cell.Row}C{cell.Col} != {n2}";
                                         changes.Add(chg);
                                     }
                                     if (changes.Count > 0) return changes;

@@ -17,7 +17,7 @@ namespace SudokuHelper.Algorithm
             foreach (var cell in emptyCells)
             {
                 SudokuChange chg = new SudokuChange(SudokuChangeType.SetNum, cell.Row, cell.Col, cell.NotesList[0]);
-                chg.Message = $"R{cell.Row}C{cell.Col}: only one possible number {cell.NotesList[0]}";
+                chg.Message = $"Naked Single: R{cell.Row}C{cell.Col} = {cell.NotesList[0]}";
                 changes.Add(chg);
                 return changes;
             }

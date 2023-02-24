@@ -443,6 +443,11 @@ namespace SudokuHelper.Sudoku
             if(c.Type == SudokuChangeType.SetNum)
             {
                 this.SetNumber(c.Num, c.Row, c.Col);
+                var houses = this.GetCell(c.Row, c.Col).SudokuHouses;
+                foreach (var house in houses)
+                {
+                    house.RemoveNote(c.Num);
+                }
             }else if (c.Type == SudokuChangeType.RemoveNote)
             {
                 this.RemoveNote(c.NoteNum, c.Row, c.Col);

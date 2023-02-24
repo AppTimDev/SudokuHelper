@@ -41,7 +41,7 @@ namespace SudokuHelper.Algorithm
                             if (cell.NotesList.Contains(i))
                             {
                                 SudokuChange chg = new SudokuChange(SudokuChangeType.SetNum, cell.Row, cell.Col, i);
-                                chg.Message = $"R{cell.Row}C{cell.Col}: only one hidden number {i}";
+                                chg.Message = $"Hidden Single: R{cell.Row}C{cell.Col} = {i}";
                                 changes.Add(chg);
                                 return changes;
                             }
