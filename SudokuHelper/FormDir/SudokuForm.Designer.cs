@@ -60,6 +60,7 @@
             this.btnNakedPair = new System.Windows.Forms.Button();
             this.btnOutputSudo = new System.Windows.Forms.Button();
             this.btnHighlightNote = new System.Windows.Forms.Button();
+            this.btnCheckAlgo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTest
@@ -398,12 +399,24 @@
             this.btnHighlightNote.UseVisualStyleBackColor = true;
             this.btnHighlightNote.Click += new System.EventHandler(this.btnHighlightNote_Click);
             // 
+            // btnCheckAlgo
+            // 
+            this.btnCheckAlgo.Location = new System.Drawing.Point(1131, 290);
+            this.btnCheckAlgo.Name = "btnCheckAlgo";
+            this.btnCheckAlgo.Size = new System.Drawing.Size(144, 33);
+            this.btnCheckAlgo.TabIndex = 49;
+            this.btnCheckAlgo.TabStop = false;
+            this.btnCheckAlgo.Text = "Check Solve by algorithm";
+            this.btnCheckAlgo.UseVisualStyleBackColor = true;
+            this.btnCheckAlgo.Click += new System.EventHandler(this.btnCheckAlgo_Click);
+            // 
             // SudokuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1331, 749);
+            this.Controls.Add(this.btnCheckAlgo);
             this.Controls.Add(this.btnHighlightNote);
             this.Controls.Add(this.btnOutputSudo);
             this.Controls.Add(this.btnNakedPair);
@@ -478,5 +491,6 @@
         private System.Windows.Forms.Button btnNakedPair;
         private System.Windows.Forms.Button btnOutputSudo;
         private System.Windows.Forms.Button btnHighlightNote;
+        private System.Windows.Forms.Button btnCheckAlgo;
     }
 }

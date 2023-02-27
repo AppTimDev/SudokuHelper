@@ -13,6 +13,7 @@ namespace SudokuHelper.FormDir
     {
         Stack<SudokuGrid> stackSteps;
         SudokuGrid grid;
+        SudokuGrid gridCopy;
         SudokuGrid gridSaved = null;
         bool bModeNote = false;
         bool bNoteVisible = true;
@@ -479,23 +480,30 @@ namespace SudokuHelper.FormDir
         {
             //must have empty cell
             //grid is valid
-            //grid is unique
-            if (grid.IsCompleted())
+            //grid is unique <-- assume it is unique
+            if (!grid.IsEmpty())
             {
-                //no empty cell and the grid is valid
-                log("The sudoku is solved!");
+                //no empty cell
+                log("No empty position!");
                 return false;
             }
+            //if (grid.IsCompleted())
+            //{
+            //    //no empty cell and the grid is valid
+            //    log("The sudoku is solved!");
+            //    return false;
+            //}
             if (!grid.IsValid())
             {
                 log("The sudoku is invalid now. Cannot proceed!");
                 return false;
             }
-            if (!grid.IsUnique())
-            {
-                log("There is no unique solution!");
-                return false;
-            }
+            //time is longer for more empty spaces
+            //if (!grid.IsUnique())
+            //{
+            //    log("There is no unique solution!");
+            //    return false;
+            //}
             return true;
         }
         private bool CheckComplete()
@@ -590,14 +598,12 @@ namespace SudokuHelper.FormDir
             }
         }
 
-        public List<SudokuChange> Analyze(bool bComputeNote=false)
+        public List<SudokuChange> Analyze(SudokuGrid _grid, bool bComputeNote=false)
         {
             List<SudokuChange> changes;
-            //SudokuGrid gridCopy = grid.Copy();
             if (bComputeNote)
             {
-                //gridCopy.ComputeNoteList();
-                grid.ComputeNoteList();
+                _grid.ComputeNoteList();
             }
 
             //use all the algorithm
@@ -610,8 +616,7 @@ namespace SudokuHelper.FormDir
 
             foreach (var algo in algoList)
             {
-                //changes = algo.Analyze(gridCopy);
-                changes = algo.Analyze(grid);
+                changes = algo.Analyze(_grid);
                 if (changes.Count > 0)
                 {
                     return changes;
@@ -622,8 +627,7 @@ namespace SudokuHelper.FormDir
         private void btnHints_Click(object sender, EventArgs e)
         {
             if (!CanFindNextStep()) return;
-
-            List<SudokuChange> changes = Analyze();
+            List<SudokuChange> changes = Analyze(grid);
             if (changes != null && changes.Count > 0)
             {
                 SudokuChange c = changes[0];
@@ -642,7 +646,7 @@ namespace SudokuHelper.FormDir
         {
             if (!CanFindNextStep()) return;
 
-            List<SudokuChange> changes = Analyze();
+            List<SudokuChange> changes = Analyze(grid);
             if (changes != null && changes.Count > 0)
             {
                 SudokuChange c = changes[0];
@@ -669,7 +673,7 @@ namespace SudokuHelper.FormDir
             {
                 bContinue = false;
 
-                List<SudokuChange> changes = Analyze();
+                List<SudokuChange> changes = Analyze(grid);
                 if (changes != null && changes.Count > 0)
                 {
                     SudokuChange c = changes[0];
@@ -690,7 +694,34 @@ namespace SudokuHelper.FormDir
                 log("Cannot find next step!");
             }
         }
+        private void btnCheckAlgo_Click(object sender, EventArgs e)
+        {
+            if (!CanFindNextStep()) return;
+            //not affect the original grid
+            gridCopy = grid.Copy(); //copy all the grid data
+            gridCopy.ComputeNoteList(); //compute all the notes for the grid copy
+            bool bContinue = true;
+            while (bContinue)
+            {
+                bContinue = false;
 
+                List<SudokuChange> changes = Analyze(gridCopy);
+                if (changes != null && changes.Count > 0)
+                {
+                    SudokuChange c = changes[0];
+                    gridCopy.Apply(c);
+                    bContinue = true;
+                }
+            }
+            if (gridCopy.IsCompleted())
+            {
+                log("The sudoku can be solved by the algorithms!");
+            }
+            else
+            {
+                log("The sudoku cannot be solved by all these algorithms!");
+            }
+        }
         private void btnLoad_Click(object sender, EventArgs e)
         {
             if (grid.Load(tbSudoku.Text))
