@@ -597,7 +597,6 @@ namespace SudokuHelper.FormDir
                 Logger.Error(ex);
             }
         }
-
         public List<SudokuChange> Analyze(SudokuGrid _grid, bool bComputeNote=false)
         {
             List<SudokuChange> changes;
@@ -745,89 +744,35 @@ namespace SudokuHelper.FormDir
             }
             log(grid.ToString());
         }
-        private void btnSingleCandidate_Click(object sender, EventArgs e)
+        private void AnalyzeByAlgorithm(ISudokuAlgorithm algo)
         {
-            SudokuGrid gridCopy = grid.Copy();
-            AlgoSingleCandidate algo = new AlgoSingleCandidate();
-            List<SudokuChange> changes = algo.Analyze(gridCopy);
-            if (changes.Count > 0)
-            {
-                grid.Unselect();
-                foreach (var c in changes)
-                {
-                    //grid.Apply(c);
-                    grid.Select(c.Row, c.Col);
-                    log($"{c.Message}");
-                }
-                grid.Draw(ref g);
-                Repaint();
-            }
-            else
-            {
-                log($"Cannot Apply {algo.AlgorithmName}!");
-            }
-        }
-
-        private void btnSinglePosition_Click(object sender, EventArgs e)
-        {
-            SudokuGrid gridCopy = grid.Copy();
-            AlgoSinglePosition algo = new AlgoSinglePosition();
-            List<SudokuChange> changes = algo.Analyze(gridCopy);
-            if (changes.Count > 0)
-            {
-                grid.Unselect();
-                foreach (var c in changes)
-                {
-                    grid.Select(c.Row, c.Col);
-                    log($"{c.Message}");
-                }
-                grid.Draw(ref g);
-                Repaint();
-            }
-            else
-            {
-                log($"Cannot Apply {algo.AlgorithmName}!");
-            }
-        }
-
-        private void btnCandidateLines_Click(object sender, EventArgs e)
-        {
-            SudokuGrid gridCopy = grid.Copy();
-            AlgoCandidateLines algo = new AlgoCandidateLines();
-            List<SudokuChange> changes = algo.Analyze(gridCopy);
-            if (changes.Count > 0)
-            {
-                grid.Unselect();
-                foreach (var c in changes)
-                {
-                    grid.Select(c.Row, c.Col);
-                    log($"{c.Message}");
-                }
-                grid.Draw(ref g);
-                Repaint();
-            }
-            else
-            {
-                log($"Cannot Apply {algo.AlgorithmName}!");
-            }
-        }
-
-        private void btnNakedPair_Click(object sender, EventArgs e)
-        {
-            AlgoNakedPair algo = new AlgoNakedPair();
-            
             //SudokuGrid gridCopy = grid.Copy();
-            //List<SudokuChange> changes = algo.Analyze(gridCopy);            
+            //List<SudokuChange> changes = algo.Analyze(gridCopy);
             List<SudokuChange> changes = algo.Analyze(grid);
             if (changes.Count > 0)
             {
                 grid.Unselect();
                 foreach (var c in changes)
                 {
-                    grid.Select(c.Row, c.Col);
-                    log($"{c.Message}");
+                    if (c.Type == SudokuChangeType.SetNum || c.Type == SudokuChangeType.RemoveNote)
+                    {
+                        grid.Select(c.Row, c.Col);
+                        log($"{c.Message}");
+                    }
                 }
                 grid.Draw(ref g);
+                foreach (var c in changes)
+                {
+                    //highlight note
+                    if (c.Type == SudokuChangeType.HighlightNoteGreen)
+                    {
+                        grid.HighlightNoteNum(ref g, c.NoteNum, c.Row, c.Col, Sudoku.Sudoku.brushLightGreen);
+                    }
+                    else if (c.Type == SudokuChangeType.HighlightNoteRed)
+                    {
+                        grid.HighlightNoteNum(ref g, c.NoteNum, c.Row, c.Col, Sudoku.Sudoku.brushLightPink);
+                    }
+                }
                 Repaint();
             }
             else
@@ -835,7 +780,22 @@ namespace SudokuHelper.FormDir
                 log($"Cannot Apply {algo.AlgorithmName}!");
             }
         }
-
+        private void btnSingleCandidate_Click(object sender, EventArgs e)
+        {
+            AnalyzeByAlgorithm(new AlgoSingleCandidate());
+        }
+        private void btnSinglePosition_Click(object sender, EventArgs e)
+        {
+            AnalyzeByAlgorithm(new AlgoSinglePosition());
+        }
+        private void btnCandidateLines_Click(object sender, EventArgs e)
+        {
+            AnalyzeByAlgorithm(new AlgoCandidateLines());
+        }
+        private void btnNakedPair_Click(object sender, EventArgs e)
+        {
+            AnalyzeByAlgorithm(new AlgoNakedPair());
+        }
         private void btnHighlightNote_Click(object sender, EventArgs e)
         {
             for (int i = 1; i <= 4; i++)

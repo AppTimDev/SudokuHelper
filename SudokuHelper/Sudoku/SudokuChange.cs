@@ -1,6 +1,6 @@
 ﻿namespace SudokuHelper.Sudoku
 {
-    public enum SudokuChangeType { SetNum, AddNote, RemoveNote };
+    public enum SudokuChangeType { SetNum, AddNote, RemoveNote, HighlightNoteGreen, HighlightNoteRed};
     public class SudokuChange
     {
         public SudokuChangeType Type { get; set; }

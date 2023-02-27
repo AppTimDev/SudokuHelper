@@ -161,6 +161,11 @@ namespace SudokuHelper.Sudoku
                 }
             }
         }
+        public void HighlightNoteNum(ref Graphics g, int noteNum, int row, int col, SolidBrush brush)
+        {
+            SudokuCell cell = GetCell(row, col);
+            cell.HighlightNoteNum(ref g, noteNum, brush);
+        }
         public void SetNoteVisible(bool bNoteVisible)
         {            
             foreach (var cell in this.Cells)

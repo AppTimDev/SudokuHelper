@@ -20,10 +20,11 @@ Sudoku Techniques:
 - Single Candidate / Naked Single (Completed)
 - Single Position / Hidden Single (Completed)
 - Candidate Lines (Completed)
+- Naked Pairs (Completed)
 
 - Double Pairs (Pending)
 - Multiple Lines (Pending)
-- Naked Pairs / Triples (Pending)
+- Naked Triples (Pending)
 - Hidden Pairs / Triples (Pending)
 - X-Wings (Pending)
 - Swordfish (Pending)
