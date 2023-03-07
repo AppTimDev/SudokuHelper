@@ -789,6 +789,11 @@ namespace SudokuHelper.FormDir
                 log("The sudoku cannot be solved by all these algorithms!");
             }
         }
+        
+        private void btnLoadFile_Click(object sender, EventArgs e)
+        {
+
+        }
         private void btnLoad_Click(object sender, EventArgs e)
         {
             if (grid.Load(tbSudoku.Text))
@@ -850,12 +855,31 @@ namespace SudokuHelper.FormDir
                 return false;
             }
         }
+        private ISudokuAlgorithm GetAlgorithm(string name)
+        {
+            switch(name)
+            {
+                case AlgoNames.SingleCandidate:
+                    return new AlgoSingleCandidate();
+                case AlgoNames.SinglePosition:
+                    return new AlgoSinglePosition();
+                case AlgoNames.CandidateLines:
+                    return new AlgoCandidateLines();
+                case AlgoNames.NakedPair:
+                    return new AlgoNakedPair();
+                default:
+                    return null;
+            }
+        }
         private void btnUseAlgo_Click(object sender, EventArgs e)
         {
             List<string> algoNames = GetCheckedNodesText(this.algoTreeView.Nodes[0].Nodes);
             foreach(var name in algoNames)
             {
-                Console.WriteLine(name);
+                if(AnalyzeByAlgorithm(GetAlgorithm(name)))
+                {
+                    return;
+                }
             }
         }
         private void btnSingleCandidate_Click(object sender, EventArgs e)

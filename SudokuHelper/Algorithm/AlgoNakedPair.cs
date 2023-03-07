@@ -11,7 +11,7 @@ namespace SudokuHelper.Algorithm
      */
     internal class AlgoNakedPair : ISudokuAlgorithm
     {
-        public string AlgorithmName { get; } = "Naked Pair";
+        public string AlgorithmName { get; } = AlgoNames.NakedPair;
         public List<SudokuChange> Analyze(SudokuGrid grid)
         {
             //think about compute notes first??

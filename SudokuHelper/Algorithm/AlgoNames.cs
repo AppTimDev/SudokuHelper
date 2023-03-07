@@ -6,10 +6,10 @@ namespace SudokuHelper.Algorithm
     {
         private static List<string> AlgoNamesList = null;
 
-        public static string SingleCandidate = "Single Candidate";
-        public static string SinglePosition = "SinglePosition";
-        public static string CandidateLines = "Candidate Lines";
-        public static string NakedPair = "Naked Pair";
+        public const string SingleCandidate = "Single Candidate";
+        public const string SinglePosition = "SinglePosition";
+        public const string CandidateLines = "Candidate Lines";
+        public const string NakedPair = "Naked Pair";
         public static List<string> ToList()
         {
             if (AlgoNamesList == null)

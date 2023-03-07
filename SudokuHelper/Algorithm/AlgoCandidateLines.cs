@@ -11,7 +11,7 @@ namespace SudokuHelper.Algorithm
      */
     internal class AlgoCandidateLines : ISudokuAlgorithm
     {
-        public string AlgorithmName { get; } = "Candidate Lines";
+        public string AlgorithmName { get; } = AlgoNames.CandidateLines;
         public List<SudokuChange> Analyze(SudokuGrid grid)
         {
             //check if exactly one note number exist in any house

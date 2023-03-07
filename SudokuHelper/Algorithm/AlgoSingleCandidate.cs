@@ -6,7 +6,7 @@ namespace SudokuHelper.Algorithm
 {
     internal class AlgoSingleCandidate : ISudokuAlgorithm
     {
-        public string AlgorithmName { get; } = "Single Candidate";
+        public string AlgorithmName { get; } = AlgoNames.SingleCandidate;
         public List<SudokuChange> Analyze(SudokuGrid grid)
         {
             //think about compute notes first??

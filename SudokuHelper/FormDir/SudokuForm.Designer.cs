@@ -63,11 +63,12 @@
             this.btnCheckAlgo = new System.Windows.Forms.Button();
             this.btnUseAlgo = new System.Windows.Forms.Button();
             this.algoTreeView = new SudokuHelper.MyTreeView();
+            this.btnLoadFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(591, 262);
+            this.btnTest.Location = new System.Drawing.Point(591, 272);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(111, 33);
             this.btnTest.TabIndex = 1;
@@ -78,7 +79,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(845, 126);
+            this.btnReset.Location = new System.Drawing.Point(845, 165);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(111, 36);
             this.btnReset.TabIndex = 2;
@@ -111,7 +112,7 @@
             // 
             // btnLock
             // 
-            this.btnLock.Location = new System.Drawing.Point(591, 60);
+            this.btnLock.Location = new System.Drawing.Point(591, 99);
             this.btnLock.Name = "btnLock";
             this.btnLock.Size = new System.Drawing.Size(111, 36);
             this.btnLock.TabIndex = 5;
@@ -122,7 +123,7 @@
             // 
             // btnUnlock
             // 
-            this.btnUnlock.Location = new System.Drawing.Point(720, 60);
+            this.btnUnlock.Location = new System.Drawing.Point(720, 99);
             this.btnUnlock.Name = "btnUnlock";
             this.btnUnlock.Size = new System.Drawing.Size(111, 36);
             this.btnUnlock.TabIndex = 6;
@@ -133,7 +134,7 @@
             // 
             // btnHelpNote
             // 
-            this.btnHelpNote.Location = new System.Drawing.Point(591, 199);
+            this.btnHelpNote.Location = new System.Drawing.Point(591, 220);
             this.btnHelpNote.Name = "btnHelpNote";
             this.btnHelpNote.Size = new System.Drawing.Size(111, 36);
             this.btnHelpNote.TabIndex = 7;
@@ -154,7 +155,7 @@
             // 
             // btnResetAll
             // 
-            this.btnResetAll.Location = new System.Drawing.Point(970, 60);
+            this.btnResetAll.Location = new System.Drawing.Point(970, 99);
             this.btnResetAll.Name = "btnResetAll";
             this.btnResetAll.Size = new System.Drawing.Size(111, 36);
             this.btnResetAll.TabIndex = 9;
@@ -165,7 +166,7 @@
             // 
             // btnLockSelected
             // 
-            this.btnLockSelected.Location = new System.Drawing.Point(591, 126);
+            this.btnLockSelected.Location = new System.Drawing.Point(591, 165);
             this.btnLockSelected.Name = "btnLockSelected";
             this.btnLockSelected.Size = new System.Drawing.Size(111, 36);
             this.btnLockSelected.TabIndex = 10;
@@ -176,7 +177,7 @@
             // 
             // btnUnlockSelected
             // 
-            this.btnUnlockSelected.Location = new System.Drawing.Point(720, 126);
+            this.btnUnlockSelected.Location = new System.Drawing.Point(720, 165);
             this.btnUnlockSelected.Name = "btnUnlockSelected";
             this.btnUnlockSelected.Size = new System.Drawing.Size(111, 36);
             this.btnUnlockSelected.TabIndex = 11;
@@ -187,7 +188,7 @@
             // 
             // btnEraseAll
             // 
-            this.btnEraseAll.Location = new System.Drawing.Point(845, 60);
+            this.btnEraseAll.Location = new System.Drawing.Point(845, 99);
             this.btnEraseAll.Name = "btnEraseAll";
             this.btnEraseAll.Size = new System.Drawing.Size(111, 36);
             this.btnEraseAll.TabIndex = 12;
@@ -220,7 +221,7 @@
             // 
             // btnSolver
             // 
-            this.btnSolver.Location = new System.Drawing.Point(845, 202);
+            this.btnSolver.Location = new System.Drawing.Point(845, 223);
             this.btnSolver.Name = "btnSolver";
             this.btnSolver.Size = new System.Drawing.Size(111, 33);
             this.btnSolver.TabIndex = 32;
@@ -231,7 +232,7 @@
             // 
             // btnCheckUnique
             // 
-            this.btnCheckUnique.Location = new System.Drawing.Point(720, 202);
+            this.btnCheckUnique.Location = new System.Drawing.Point(720, 223);
             this.btnCheckUnique.Name = "btnCheckUnique";
             this.btnCheckUnique.Size = new System.Drawing.Size(111, 33);
             this.btnCheckUnique.TabIndex = 33;
@@ -264,7 +265,7 @@
             // 
             // btnHints
             // 
-            this.btnHints.Location = new System.Drawing.Point(720, 262);
+            this.btnHints.Location = new System.Drawing.Point(720, 272);
             this.btnHints.Name = "btnHints";
             this.btnHints.Size = new System.Drawing.Size(111, 33);
             this.btnHints.TabIndex = 36;
@@ -275,7 +276,7 @@
             // 
             // btnFindNext
             // 
-            this.btnFindNext.Location = new System.Drawing.Point(845, 262);
+            this.btnFindNext.Location = new System.Drawing.Point(845, 272);
             this.btnFindNext.Name = "btnFindNext";
             this.btnFindNext.Size = new System.Drawing.Size(111, 33);
             this.btnFindNext.TabIndex = 37;
@@ -286,7 +287,7 @@
             // 
             // btnAlgo
             // 
-            this.btnAlgo.Location = new System.Drawing.Point(970, 262);
+            this.btnAlgo.Location = new System.Drawing.Point(970, 272);
             this.btnAlgo.Name = "btnAlgo";
             this.btnAlgo.Size = new System.Drawing.Size(111, 33);
             this.btnAlgo.TabIndex = 38;
@@ -309,14 +310,14 @@
             // tbSudoku
             // 
             this.tbSudoku.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.tbSudoku.Location = new System.Drawing.Point(591, 12);
+            this.tbSudoku.Location = new System.Drawing.Point(591, 51);
             this.tbSudoku.Name = "tbSudoku";
             this.tbSudoku.Size = new System.Drawing.Size(240, 26);
             this.tbSudoku.TabIndex = 40;
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(845, 12);
+            this.btnLoad.Location = new System.Drawing.Point(845, 51);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(111, 33);
             this.btnLoad.TabIndex = 41;
@@ -381,7 +382,7 @@
             // 
             // btnOutputSudo
             // 
-            this.btnOutputSudo.Location = new System.Drawing.Point(961, 12);
+            this.btnOutputSudo.Location = new System.Drawing.Point(961, 51);
             this.btnOutputSudo.Name = "btnOutputSudo";
             this.btnOutputSudo.Size = new System.Drawing.Size(120, 33);
             this.btnOutputSudo.TabIndex = 47;
@@ -430,12 +431,24 @@
             this.algoTreeView.Size = new System.Drawing.Size(187, 196);
             this.algoTreeView.TabIndex = 50;
             // 
+            // btnLoadFile
+            // 
+            this.btnLoadFile.Location = new System.Drawing.Point(845, 9);
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(111, 33);
+            this.btnLoadFile.TabIndex = 52;
+            this.btnLoadFile.TabStop = false;
+            this.btnLoadFile.Text = "Load From File";
+            this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            // 
             // SudokuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1331, 749);
+            this.Controls.Add(this.btnLoadFile);
             this.Controls.Add(this.btnUseAlgo);
             this.Controls.Add(this.algoTreeView);
             this.Controls.Add(this.btnCheckAlgo);
@@ -516,5 +529,6 @@
         private System.Windows.Forms.Button btnCheckAlgo;
         private MyTreeView algoTreeView;
         private System.Windows.Forms.Button btnUseAlgo;
+        private System.Windows.Forms.Button btnLoadFile;
     }
 }

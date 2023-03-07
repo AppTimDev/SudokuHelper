@@ -11,7 +11,7 @@ namespace SudokuHelper.Algorithm
      */
     internal class AlgoSinglePosition : ISudokuAlgorithm
     {         
-        public string AlgorithmName { get; } = "Single Position"; //or Hidden Single
+        public string AlgorithmName { get; } = AlgoNames.SinglePosition; //or Hidden Single
         public List<SudokuChange> Analyze(SudokuGrid grid)
         {
             //check if exactly one note number exist in any house
