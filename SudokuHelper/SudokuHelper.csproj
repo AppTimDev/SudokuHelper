@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Algorithm\AlgoCandidateLines.cs" />
     <Compile Include="Algorithm\AlgoNakedPair.cs" />
+    <Compile Include="Algorithm\AlgoNames.cs" />
     <Compile Include="Algorithm\AlgoSingleCandidate.cs" />
     <Compile Include="Algorithm\AlgoSinglePosition.cs" />
     <Compile Include="Sudoku\SudokuChange.cs" />

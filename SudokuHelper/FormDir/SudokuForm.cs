@@ -64,9 +64,10 @@ namespace SudokuHelper.FormDir
             this.algoTreeView.HideSelection = false;
             this.algoTreeView.HotTracking = true;
             TreeNode rootNode = this.algoTreeView.Nodes.Add("Algorithms");
-            rootNode.Nodes.Add("C");
-            rootNode.Nodes.Add("D");
-
+            foreach (var algoName in AlgoNames.ToList())
+            {
+                rootNode.Nodes.Add(algoName);
+            }
             this.algoTreeView.ExpandAll();
         }
         private void algoTreeView_DoubleClick(object sender, EventArgs e)
@@ -106,6 +107,21 @@ namespace SudokuHelper.FormDir
                     this.CheckChildNodes(item, bChecked);
                 }
             }
+        }
+        private List<string> GetCheckedNodesText(TreeNodeCollection nodes)
+        {
+            List<string> strs = new List<string>();
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Checked)
+                {
+                    if (!String.IsNullOrEmpty(node.Text))
+                    {
+                        strs.Add(node.Text);
+                    }
+                }
+            }
+            return strs;
         }
         public void btnNumber_Click(object sender, EventArgs e)
         {
@@ -796,7 +812,7 @@ namespace SudokuHelper.FormDir
             }
             log(grid.ToString());
         }
-        private void AnalyzeByAlgorithm(ISudokuAlgorithm algo)
+        private bool AnalyzeByAlgorithm(ISudokuAlgorithm algo)
         {
             //SudokuGrid gridCopy = grid.Copy();
             //List<SudokuChange> changes = algo.Analyze(gridCopy);
@@ -826,15 +842,21 @@ namespace SudokuHelper.FormDir
                     }
                 }
                 Repaint();
+                return true;
             }
             else
             {
                 log($"Cannot Apply {algo.AlgorithmName}!");
+                return false;
             }
         }
         private void btnUseAlgo_Click(object sender, EventArgs e)
         {
-
+            List<string> algoNames = GetCheckedNodesText(this.algoTreeView.Nodes[0].Nodes);
+            foreach(var name in algoNames)
+            {
+                Console.WriteLine(name);
+            }
         }
         private void btnSingleCandidate_Click(object sender, EventArgs e)
         {
