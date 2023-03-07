@@ -257,6 +257,7 @@ namespace SudokuHelper.Sudoku
             if (s.Length == 81 && s.All(c => c >= '0' && c <= '9'))
             {
                 Reset();
+                ResetCurrentPos();
                 for (int i = 0; i < 9; i++)
                 {
                     for (int j = 0; j < 9; j++)

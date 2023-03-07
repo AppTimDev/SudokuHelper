@@ -5,6 +5,7 @@ using SudokuHelper.Sudoku;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SudokuHelper.FormDir
@@ -20,6 +21,7 @@ namespace SudokuHelper.FormDir
         private Button[] btnNumbers;
         private Bitmap bmp; //use an in-memory bitmap to Persistent graphics
         private Graphics g;
+        private int currDataLine = -1; //for load the next line of the data to the grid
         public SudokuForm()
         {
             InitializeComponent();
@@ -828,18 +830,75 @@ namespace SudokuHelper.FormDir
         }
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                string appPath = Path.GetDirectoryName(Application.ExecutablePath);
+                string fileName = Path.Combine(appPath, "data.txt");
+                List<string> grids = new List<string>();
+                using (StreamReader sr = File.OpenText(fileName))
+                {
+                    string s = String.Empty;
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        grids.Add(s);
+                    }
+                }
+                
+                int cnt = 0;
+                string sudoStr;
+                if(currDataLine==-1 || currDataLine >=grids.Count)
+                {
+                    currDataLine = 1;
+                }
+                foreach (var s in grids)
+                {
+                    cnt++;
+                    if (cnt>currDataLine)
+                    {
+                        sudoStr = s.Trim().Substring(0, 81);
+                        if (LoadSudoku(sudoStr))
+                        {
+                            currDataLine = cnt;
+                            return;
+                        }
+                    }
+                }
+                cnt = 0;
+                foreach (var s in grids)
+                {
+                    cnt++;
+                    if (cnt <= currDataLine)
+                    {
+                        sudoStr = s.Trim().Substring(0, 81);
+                        if (LoadSudoku(sudoStr))
+                        {
+                            currDataLine = cnt;
+                            return;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+            }
         }
-        private void btnLoad_Click(object sender, EventArgs e)
+        private bool LoadSudoku(string s)
         {
-            if (grid.Load(tbSudoku.Text))
+            if (grid.Load(s))
             {
                 grid.Lock();
                 grid.Draw(ref g);
                 Repaint();
                 RemoveAllSteps();
+                return true;
             }
-            else
+            return false;
+        }
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            bool bLoad = LoadSudoku(tbSudoku.Text);
+            if (!bLoad)
             {
                 log("The sudoku string is not valid!! It should contain 81 characters from 0 to 9.");
             }
