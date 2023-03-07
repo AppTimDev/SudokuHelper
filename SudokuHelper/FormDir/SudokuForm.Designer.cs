@@ -61,6 +61,8 @@
             this.btnOutputSudo = new System.Windows.Forms.Button();
             this.btnHighlightNote = new System.Windows.Forms.Button();
             this.btnCheckAlgo = new System.Windows.Forms.Button();
+            this.algoTreeView = new SudokuHelper.MyTreeView();
+            this.btnUseAlgo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTest
@@ -325,7 +327,7 @@
             // 
             // btnSingleCandidate
             // 
-            this.btnSingleCandidate.Location = new System.Drawing.Point(1131, 63);
+            this.btnSingleCandidate.Location = new System.Drawing.Point(1131, 311);
             this.btnSingleCandidate.Name = "btnSingleCandidate";
             this.btnSingleCandidate.Size = new System.Drawing.Size(111, 33);
             this.btnSingleCandidate.TabIndex = 42;
@@ -336,7 +338,7 @@
             // 
             // btnSinglePosition
             // 
-            this.btnSinglePosition.Location = new System.Drawing.Point(1131, 116);
+            this.btnSinglePosition.Location = new System.Drawing.Point(1131, 364);
             this.btnSinglePosition.Name = "btnSinglePosition";
             this.btnSinglePosition.Size = new System.Drawing.Size(111, 33);
             this.btnSinglePosition.TabIndex = 43;
@@ -357,7 +359,7 @@
             // 
             // btnCandidateLines
             // 
-            this.btnCandidateLines.Location = new System.Drawing.Point(1131, 169);
+            this.btnCandidateLines.Location = new System.Drawing.Point(1131, 417);
             this.btnCandidateLines.Name = "btnCandidateLines";
             this.btnCandidateLines.Size = new System.Drawing.Size(111, 33);
             this.btnCandidateLines.TabIndex = 45;
@@ -368,7 +370,7 @@
             // 
             // btnNakedPair
             // 
-            this.btnNakedPair.Location = new System.Drawing.Point(1132, 223);
+            this.btnNakedPair.Location = new System.Drawing.Point(1132, 471);
             this.btnNakedPair.Name = "btnNakedPair";
             this.btnNakedPair.Size = new System.Drawing.Size(111, 33);
             this.btnNakedPair.TabIndex = 46;
@@ -401,7 +403,7 @@
             // 
             // btnCheckAlgo
             // 
-            this.btnCheckAlgo.Location = new System.Drawing.Point(1131, 290);
+            this.btnCheckAlgo.Location = new System.Drawing.Point(1131, 538);
             this.btnCheckAlgo.Name = "btnCheckAlgo";
             this.btnCheckAlgo.Size = new System.Drawing.Size(144, 33);
             this.btnCheckAlgo.TabIndex = 49;
@@ -410,12 +412,32 @@
             this.btnCheckAlgo.UseVisualStyleBackColor = true;
             this.btnCheckAlgo.Click += new System.EventHandler(this.btnCheckAlgo_Click);
             // 
+            // algoTreeView
+            // 
+            this.algoTreeView.Location = new System.Drawing.Point(1132, 60);
+            this.algoTreeView.Name = "algoTreeView";
+            this.algoTreeView.Size = new System.Drawing.Size(143, 181);
+            this.algoTreeView.TabIndex = 50;
+            // 
+            // btnUseAlgo
+            // 
+            this.btnUseAlgo.Location = new System.Drawing.Point(1131, 262);
+            this.btnUseAlgo.Name = "btnUseAlgo";
+            this.btnUseAlgo.Size = new System.Drawing.Size(111, 33);
+            this.btnUseAlgo.TabIndex = 51;
+            this.btnUseAlgo.TabStop = false;
+            this.btnUseAlgo.Text = "Use algorithm";
+            this.btnUseAlgo.UseVisualStyleBackColor = true;
+            this.btnUseAlgo.Click += new System.EventHandler(this.btnUseAlgo_Click);
+            // 
             // SudokuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1331, 749);
+            this.Controls.Add(this.btnUseAlgo);
+            this.Controls.Add(this.algoTreeView);
             this.Controls.Add(this.btnCheckAlgo);
             this.Controls.Add(this.btnHighlightNote);
             this.Controls.Add(this.btnOutputSudo);
@@ -492,5 +514,7 @@
         private System.Windows.Forms.Button btnOutputSudo;
         private System.Windows.Forms.Button btnHighlightNote;
         private System.Windows.Forms.Button btnCheckAlgo;
+        private MyTreeView algoTreeView;
+        private System.Windows.Forms.Button btnUseAlgo;
     }
 }

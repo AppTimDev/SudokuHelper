@@ -40,7 +40,7 @@ namespace SudokuHelper.FormDir
             g = Graphics.FromImage(bmp);
             //g = panel1.CreateGraphics();
             g.SetHighQulity();
-
+            InitializeAlgoTreeview();
             InitializeSudoku();
             InitializeBtnNumber();
             btnRedo.Enabled = false;
@@ -49,12 +49,64 @@ namespace SudokuHelper.FormDir
             //testing sample
             this.tbSudoku.Text = "006030708030000001200000600100350006079040150500017004002000007600000080407060200";
         }
-        public void InitializeSudoku()
+        private void InitializeSudoku()
         {
             grid = new SudokuGrid();
             Sudoku.Sudoku.DrawGridLines(ref g);
         }
-        
+        private void InitializeAlgoTreeview()
+        {
+            this.algoTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.algoTreeView_AfterCheck);
+            this.algoTreeView.DoubleClick += new System.EventHandler(this.algoTreeView_DoubleClick);
+            this.algoTreeView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.algoTreeView_MouseUp);
+
+            this.algoTreeView.CheckBoxes = true;
+            this.algoTreeView.HideSelection = false;
+            this.algoTreeView.HotTracking = true;
+            TreeNode rootNode = this.algoTreeView.Nodes.Add("Algorithms");
+            rootNode.Nodes.Add("C");
+            rootNode.Nodes.Add("D");
+
+            this.algoTreeView.ExpandAll();
+        }
+        private void algoTreeView_DoubleClick(object sender, EventArgs e)
+        {
+            var localPosition = algoTreeView.PointToClient(Cursor.Position);
+            var hitTestInfo = algoTreeView.HitTest(localPosition);
+            if (hitTestInfo.Location == TreeViewHitTestLocations.StateImage)
+                return;
+        }
+        private void algoTreeView_MouseUp(object sender, MouseEventArgs e)
+        {
+            //unselect item when clicking outside of tree
+            this.algoTreeView.SelectedNode = this.algoTreeView.GetNodeAt(this.algoTreeView.PointToClient(Control.MousePosition));
+        }
+        private void algoTreeView_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (e.Action != TreeViewAction.Unknown)
+            {
+                try
+                {
+                    e.Node.TreeView.BeginUpdate();
+                    CheckChildNodes(e.Node, e.Node.Checked);
+                }
+                finally
+                {
+                    e.Node.TreeView.EndUpdate();
+                }
+            }
+        }
+        private void CheckChildNodes(TreeNode node, Boolean bChecked)
+        {
+            foreach (TreeNode item in node.Nodes)
+            {
+                item.Checked = bChecked;
+                if (item.Nodes.Count > 0)
+                {
+                    this.CheckChildNodes(item, bChecked);
+                }
+            }
+        }
         public void btnNumber_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -779,6 +831,10 @@ namespace SudokuHelper.FormDir
             {
                 log($"Cannot Apply {algo.AlgorithmName}!");
             }
+        }
+        private void btnUseAlgo_Click(object sender, EventArgs e)
+        {
+
         }
         private void btnSingleCandidate_Click(object sender, EventArgs e)
         {
