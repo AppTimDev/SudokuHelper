@@ -665,7 +665,7 @@ namespace SudokuHelper.FormDir
                 Logger.Error(ex);
             }
         }
-        public List<SudokuChange> Analyze(SudokuGrid _grid, bool bComputeNote=false)
+        public List<SudokuChange> Analyze(SudokuGrid _grid, List<string> algoNames = null, bool bComputeNote=false)
         {
             List<SudokuChange> changes;
             if (bComputeNote)
@@ -673,13 +673,8 @@ namespace SudokuHelper.FormDir
                 _grid.ComputeNoteList();
             }
 
-            //use all the algorithm
-            List<ISudokuAlgorithm> algoList = new List<ISudokuAlgorithm>();
-            ISudokuAlgorithm alg = new AlgoSingleCandidate();
-            algoList.Add(alg);
-            algoList.Add(new AlgoSinglePosition());
-            algoList.Add(new AlgoCandidateLines());
-            algoList.Add(new AlgoNakedPair());
+            //use the selected algorithm, if algoNames is null, use all the algorithms
+            List<ISudokuAlgorithm> algoList = GetAlgorithms(algoNames);
 
             foreach (var algo in algoList)
             {
@@ -789,7 +784,48 @@ namespace SudokuHelper.FormDir
                 log("The sudoku cannot be solved by all these algorithms!");
             }
         }
-        
+        private void btnCheckSelectedAlgo_Click(object sender, EventArgs e)
+        {
+            if (!CanFindNextStep()) return;
+
+            string s = "";
+            //selected algos names
+            List<string> algoNames = GetCheckedNodesText(this.algoTreeView.Nodes[0].Nodes);
+
+            //not affect the original grid
+            gridCopy = grid.Copy(); //copy all the grid data
+            gridCopy.ComputeNoteList(); //compute all the notes for the grid copy
+            bool bContinue = true;
+            while (bContinue)
+            {
+                bContinue = false;
+
+                List<SudokuChange> changes = Analyze(gridCopy, algoNames);
+                if (changes != null && changes.Count > 0)
+                {
+                    SudokuChange c = changes[0];
+                    gridCopy.Apply(c);
+                    bContinue = true;
+                }
+            }
+            if (gridCopy.IsCompleted())
+            {
+                log("The sudoku can be solved by the algorithms:");
+            }
+            else
+            {
+                log("The sudoku cannot be solved by all these algorithms:");
+            }
+            if(algoNames==null || algoNames.Count == 0)
+            {
+                algoNames = AlgoNames.ToList();
+            }            
+            foreach (var name in algoNames)
+            {
+                s += name + ", ";
+            }
+            log(s);
+        }
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
 
@@ -855,6 +891,31 @@ namespace SudokuHelper.FormDir
                 return false;
             }
         }
+        private List<ISudokuAlgorithm> GetAlgorithms(List<string> names = null)
+        {
+            List<ISudokuAlgorithm> algoList = new List<ISudokuAlgorithm>();
+            if (names != null && names.Count>0)
+            {
+                ISudokuAlgorithm alg;
+                foreach (var name in names)
+                {
+                    alg = GetAlgorithm(name);
+                    if (alg != null)
+                    {
+                        algoList.Add(alg);
+                    }
+                }
+            }
+            else
+            {
+                //return all
+                algoList.Add(new AlgoSingleCandidate());
+                algoList.Add(new AlgoSinglePosition());
+                algoList.Add(new AlgoCandidateLines());
+                algoList.Add(new AlgoNakedPair());
+            }
+            return algoList;
+        }
         private ISudokuAlgorithm GetAlgorithm(string name)
         {
             switch(name)
@@ -910,5 +971,6 @@ namespace SudokuHelper.FormDir
             }
             Repaint();
         }
+
     }
 }
