@@ -846,19 +846,19 @@ namespace SudokuHelper.FormDir
                 
                 int cnt = 0;
                 string sudoStr;
-                if(currDataLine==-1 || currDataLine >=grids.Count)
+                if(currDataLine==-1 || currDataLine > grids.Count)
                 {
-                    currDataLine = 1;
+                    currDataLine = 0;
                 }
                 foreach (var s in grids)
                 {
                     cnt++;
-                    if (cnt>currDataLine)
+                    if (cnt>=currDataLine)
                     {
                         sudoStr = s.Trim().Substring(0, 81);
                         if (LoadSudoku(sudoStr))
                         {
-                            currDataLine = cnt;
+                            currDataLine = cnt+1;
                             return;
                         }
                     }
@@ -867,12 +867,12 @@ namespace SudokuHelper.FormDir
                 foreach (var s in grids)
                 {
                     cnt++;
-                    if (cnt <= currDataLine)
+                    if (cnt < currDataLine)
                     {
                         sudoStr = s.Trim().Substring(0, 81);
                         if (LoadSudoku(sudoStr))
                         {
-                            currDataLine = cnt;
+                            currDataLine = cnt+1;
                             return;
                         }
                     }
