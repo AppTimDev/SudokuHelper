@@ -11,8 +11,8 @@
 
 Current Status (Not completed): 
 
-Version 1:
-![Version 1](update.jpg)
+Version 2:
+![Version 2](update.jpg)
 
 ---
 
